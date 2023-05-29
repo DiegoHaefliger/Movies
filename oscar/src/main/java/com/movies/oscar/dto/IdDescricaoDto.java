@@ -7,11 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class AwardDto {
+public class IdDescricaoDto {
 
-	private String producer;
-	private Integer interval;
-	private Integer previousWin;
-	private Integer followingWin;
+	private int id;
+	private String descricao;
 
 }

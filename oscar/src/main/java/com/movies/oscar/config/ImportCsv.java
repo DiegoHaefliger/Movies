@@ -124,17 +124,21 @@ public class ImportCsv {
 					// filtra os Studios e salva no Movies
 					for (int studio = 0; studio < studios.length; studio++) {
 						var nomeStudio = studios[studio];
-						var studiofilter = studioListRepository.stream().filter(s -> s.getName().equals(nomeStudio)).findFirst().orElse(null);
-						var moveStudio = new MovieStudio(newMovie, studiofilter);
-						movieStudioRepository.save(moveStudio);
+						if (nomeStudio.trim().length() > 0) {
+							var studiofilter = studioListRepository.stream().filter(s -> s.getName().equals(nomeStudio)).findFirst().orElse(null);
+							var moveStudio = new MovieStudio(newMovie, studiofilter);
+							movieStudioRepository.save(moveStudio);
+						}
 					}
 
 					// filtra os Producers e salva no Movies
 					for (int producer = 0; producer < producers.length; producer++) {
 						var nomeProducer = producers[producer];
-						var producerfilter = producersListRepository.stream().filter(s -> s.getName().equals(nomeProducer)).findFirst().orElse(null);
-						var moveProcedure = new MovieProducer(newMovie, producerfilter);
-						movieProducersRepository.save(moveProcedure);
+						if (nomeProducer.trim().length() > 0) {
+							var producerfilter = producersListRepository.stream().filter(s -> s.getName().equals(nomeProducer)).findFirst().orElse(null);
+							var moveProcedure = new MovieProducer(newMovie, producerfilter);
+							movieProducersRepository.save(moveProcedure);
+						}
 					}
 				}
 			}
@@ -155,7 +159,6 @@ public class ImportCsv {
 	private List<String> removeRegistrosDuplicadoNaLista(List<String> list) {
 		Set<String> set = new LinkedHashSet<>(list);
 		List<String> listWithoutDuplicates = new ArrayList<>(set);
-		listWithoutDuplicates.removeAll(Arrays.asList("", null));
 
 		return listWithoutDuplicates;
 	}
