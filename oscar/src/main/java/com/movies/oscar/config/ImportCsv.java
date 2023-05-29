@@ -4,6 +4,7 @@ import com.movies.oscar.entity.*;
 import com.movies.oscar.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -26,11 +27,14 @@ public class ImportCsv {
 	private MovieProducersRepository movieProducersRepository;
 	@Autowired
 	private MovieStudioRepository movieStudioRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 	@Bean
 	public void importCsvMovies() throws IOException {
 		deleteRegistros();
 		importCsv();
+		insertUser();
 	}
 
 	private void deleteRegistros() {
@@ -40,6 +44,7 @@ public class ImportCsv {
 		studioRepository.deleteAll();
 		producersRepository.deleteAll();
 		movieRepository.deleteAll();
+		userRepository.deleteAll();
 	}
 
 	@Transactional
@@ -161,6 +166,17 @@ public class ImportCsv {
 		List<String> listWithoutDuplicates = new ArrayList<>(set);
 
 		return listWithoutDuplicates;
+	}
+
+	private void insertUser() {
+
+		System.out.println("--- INSERE USER DO BANCO ---");
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		var passrword = passwordEncoder.encode("admin123");
+
+		var user = new User("teste", "admin", passrword, "admin");
+
+		userRepository.save(user);
 	}
 
 }

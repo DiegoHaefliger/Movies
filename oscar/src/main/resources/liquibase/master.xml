@@ -24,4 +24,8 @@
         <sqlFile path="liquibase/changeLog/5.CreateTableMovieStudio.sql" endDelimiter="GO"/>
     </changeSet>
 
+    <changeSet id="6" author="diegohaefliger@hotmail.com">
+        <sqlFile path="liquibase/changeLog/6.CreateTableUser.sql" endDelimiter="GO"/>
+    </changeSet>
+
 </databaseChangeLog>
