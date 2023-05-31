@@ -29,7 +29,6 @@ public class Configurations {
 		return http.csrf().disable()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().authorizeRequests()
-				.antMatchers(HttpMethod.GET, "/movie").permitAll()
 				.antMatchers(HttpMethod.POST, "/login").permitAll()
 				.antMatchers( "/h2-console/**").permitAll()
 				.anyRequest().authenticated()

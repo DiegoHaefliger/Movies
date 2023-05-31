@@ -12,7 +12,7 @@ import java.time.ZoneOffset;
 public class TokenService {
 
 	private static final String SECRECT = "u8x/A?D(G+KaPdSgVkYp3s6v9y$B&E)H";
-	private static final String ISSUER = "Irrigacao";
+	private static final String ISSUER = "Movie";
 	private static final Integer TEMPO_TOKEN = 10;
 
 	public String gerarToken(User user) {
@@ -20,7 +20,7 @@ public class TokenService {
 				.withIssuer(ISSUER)
 				.withSubject(user.getLogin())
 				.withClaim("id", user.getId())
-				.withExpiresAt(LocalDateTime.now().plusDays(TEMPO_TOKEN).toInstant(ZoneOffset.of("-03:00")))
+				.withExpiresAt(LocalDateTime.now().plusHours(TEMPO_TOKEN).toInstant(ZoneOffset.of("-03:00")))
 				.sign(Algorithm.HMAC256(SECRECT));
 	}
 

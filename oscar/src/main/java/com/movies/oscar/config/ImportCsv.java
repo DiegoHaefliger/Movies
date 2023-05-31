@@ -33,11 +33,11 @@ public class ImportCsv {
 	@Bean
 	public void importCsvMovies() throws IOException {
 		deleteRegistros();
-		importCsv();
+		importCsv(pathCsv);
 		insertUser();
 	}
 
-	private void deleteRegistros() {
+	public void deleteRegistros() {
 		System.out.println("--- DELETA REGISTROS EXISTENTES DO BANCO ---");
 		movieStudioRepository.deleteAll();
 		movieProducersRepository.deleteAll();
@@ -48,11 +48,10 @@ public class ImportCsv {
 	}
 
 	@Transactional
-	private void importCsv() {
+	public void importCsv(String path) {
 		System.out.println("--- IMPORTA REGISTROS DO ARQUIVO PARA O BANCO ---");
 
-		var arquivoCSV = new File(pathCsv);
-		var movieList = new ArrayList<Movie>();
+		var arquivoCSV = new File(path);
 		var studioList = new ArrayList<Studio>();
 		var producersList = new ArrayList<Producer>();
 
@@ -161,14 +160,14 @@ public class ImportCsv {
 		return valores.replace(" and ", ",").replace(", ", ",").split(",");
 	}
 
-	private List<String> removeRegistrosDuplicadoNaLista(List<String> list) {
+	public List<String> removeRegistrosDuplicadoNaLista(List<String> list) {
 		Set<String> set = new LinkedHashSet<>(list);
 		List<String> listWithoutDuplicates = new ArrayList<>(set);
 
 		return listWithoutDuplicates;
 	}
 
-	private void insertUser() {
+	public void insertUser() {
 
 		System.out.println("--- INSERE USER DO BANCO ---");
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
