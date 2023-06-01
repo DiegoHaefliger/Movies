@@ -70,8 +70,8 @@ public class ImportCsv {
 				String linha = scan.nextLine();
 				String[] valores = linha.split(";");
 				if (valores[0].length() > 0) {
-					String[] studios = replaceStudio(valores[2]);
-					String[] producers = replaceProducer(valores[3]);
+					String[] studios = splitStudio(valores[2]);
+					String[] producers = splitProducer(valores[3]);
 
 					for (int i = 0; i < studios.length; i++) {
 						studioTempList.add(studios[i].toString().trim());
@@ -113,8 +113,8 @@ public class ImportCsv {
 				if (valores[0].length() > 0) {
 					var year = Integer.parseInt(valores[0]);
 					var title = valores[1];
-					String[] studios = replaceStudio(valores[2]);
-					String[] producers = replaceProducer(valores[3]);
+					String[] studios = splitStudio(valores[2]);
+					String[] producers = splitProducer(valores[3]);
 					var winner = false;
 
 					if (valores.length > 4 && valores[4] != null) {
@@ -152,11 +152,11 @@ public class ImportCsv {
 		}
 	}
 
-	private String[] replaceStudio(String valores) {
+	public String[] splitStudio(String valores) {
 		return valores.replace(", ", ",").split(",");
 	}
 
-	private String[] replaceProducer(String valores) {
+	public String[] splitProducer(String valores) {
 		return valores.replace(" and ", ",").replace(", ", ",").split(",");
 	}
 

@@ -18,6 +18,13 @@ Importação de um arquivo (.CSV) contendo uma lista de filmes juntamente com se
  # Gerenciamento de Banco de Dados (Liquibase)
 Para gerenciar o versionamento do banco de dados foi utilizado o Liquibase. As tabelas do sistema foram criadas utilizando essa ferramenta.
 
+# Acesso ao Banco de Dados
+- Link de acesso: http://localhost:8080/h2-console
+- Driver Class: org.h2.Driver
+- JDBC URL: jdbc: h2:~/movie
+- User Name: sa
+- Password: (vazio, não informar)
+
 # Autenticação das APIs
 
 Para ter acesso aos endpoints primeiro é necessário realizar a autenticação JWT via TOKEN na rota ([login](http://localhost:8080/login)), onde já existe cadastrado no banco de dados um usuário cuja suas credênciais são:
